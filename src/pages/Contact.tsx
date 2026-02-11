@@ -41,22 +41,28 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen pt-20 bg-white">
-      {/* Hero Section - Full width with overlay */}
-      <section className="relative h-[60vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0">
-          <img 
-            src={barrelsRow} 
-            alt="Tolani Petroleum" 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-900/95 via-gray-900/80 to-gray-900/60" />
+      {/* Hero Section - ENTIRE IMAGE VISIBLE, NO CROPPING */}
+      <section className="relative h-[60vh] flex items-center overflow-hidden bg-gray-900">
+        {/* Background Image - CONTAIN shows full image without cropping */}
+        <div 
+          className="absolute inset-0"
+          style={{ 
+            backgroundImage: `url(${barrelsRow})`,
+            backgroundSize: "contain",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
+          {/* Dark Overlay - Affects entire container */}
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 via-gray-900/60 to-gray-900/50" />
         </div>
         
         {/* Decorative Elements */}
-        <div className="absolute top-20 right-20 w-64 h-64 border border-white/10 rounded-full" />
-        <div className="absolute bottom-20 left-20 w-96 h-96 border border-white/5 rounded-full" />
+        <div className="absolute top-20 right-20 w-64 h-64 border border-white/10 rounded-full pointer-events-none z-10" />
+        <div className="absolute bottom-20 left-20 w-96 h-96 border border-white/5 rounded-full pointer-events-none z-10" />
         
-        <div className="relative max-w-7xl mx-auto px-6 w-full">
+        {/* Content */}
+        <div className="relative max-w-7xl mx-auto px-6 w-full z-20">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -110,7 +116,7 @@ const Contact = () => {
         
         {/* Floating Badge */}
         <motion.div 
-          className="absolute bottom-10 right-10 bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20 hidden lg:block"
+          className="absolute bottom-10 right-10 bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20 hidden lg:block z-30"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}

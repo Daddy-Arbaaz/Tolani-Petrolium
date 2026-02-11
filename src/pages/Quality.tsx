@@ -44,58 +44,44 @@ const certifications = [
   { name: "DIN Standards", icon: Gauge, description: "German Institute for Standardization" },
 ];
 
-const stats = [
-  { icon: Clock, value: "50+", label: "Years of Excellence" },
-  { icon: FlaskConical, value: "100+", label: "Test Parameters" },
-  { icon: Award, value: "9", label: "ISO Standards" },
-  { icon: Users, value: "500+", label: "Happy Clients" },
-];
-
 const Quality = () => (
   <div className="min-h-screen pt-20 h-full bg-white">
-    {/* Hero Section - COMPLETELY FIXED IMAGE FITTING */}
-    <section className="relative h-[70vh] flex items-center overflow-hidden">
-      {/* Background Image with proper positioning */}
-      <div className="absolute inset-0 bg-gray-900">
-        <img 
-          src={barrelsRow} 
-          alt="Quality" 
-          className="w-full h-full"
-          style={{ 
-            objectFit: "cover",
-            objectPosition: "center 40%",
-            opacity: 0.85
-          }}
-          onError={(e) => {
-            e.currentTarget.src = qualityBarrels;
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/95 via-gray-900/85 to-gray-900/70" />
+    {/* Hero Section - ENTIRE IMAGE VISIBLE, NO CROPPING */}
+    <section className="relative h-[70vh] flex items-center overflow-hidden bg-gray-900">
+      {/* Background Image - CONTAIN shows full image without cropping */}
+      <div 
+        className="absolute inset-0"
+        style={{ 
+          backgroundImage: `url(${barrelsRow})`,
+          backgroundSize: "contain",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        {/* Dark Overlay - Affects entire container */}
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 via-gray-900/60 to-gray-900/50" />
       </div>
       
       {/* Decorative Elements */}
-      <div className="absolute top-20 right-20 w-96 h-96 border border-white/10 rounded-full" />
-      <div className="absolute bottom-20 left-20 w-64 h-64 border border-white/5 rounded-full" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border border-white/5 rounded-full" />
+      <div className="absolute top-20 right-20 w-96 h-96 border border-white/10 rounded-full pointer-events-none z-10" />
+      <div className="absolute bottom-20 left-20 w-64 h-64 border border-white/5 rounded-full pointer-events-none z-10" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-white/5 rounded-full pointer-events-none z-10" />
       
-      {/* Floating Quality Badge - Repositioned */}
+      {/* Floating Quality Badge */}
       <motion.div
-        className="absolute top-32 right-10 hidden lg:block z-20"
+        className="absolute top-32 right-10 hidden lg:block z-30"
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, delay: 0.3 }}
       >
-        <div className="relative">
-          <div className="absolute inset-0 bg-amber/20 blur-2xl rounded-full" />
-          <div className="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-amber/20 flex items-center justify-center">
-                <Award className="w-6 h-6 text-amber" />
-              </div>
-              <div>
-                <div className="text-white font-bold">ISO 9001:2015</div>
-                <div className="text-white/60 text-sm">Quality Certified</div>
-              </div>
+        <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-full bg-amber/20 flex items-center justify-center">
+              <Award className="w-6 h-6 text-amber" />
+            </div>
+            <div>
+              <div className="text-white font-bold">ISO 9001:2015</div>
+              <div className="text-white/60 text-sm">Quality Certified</div>
             </div>
           </div>
         </div>
@@ -148,29 +134,6 @@ const Quality = () => (
             Five decades of uncompromising quality standards, certified excellence, 
             and continuous innovation in petroleum product testing.
           </motion.p>
-          
-          {/* Stats Counter - Updated colors */}
-          <motion.div 
-            className="flex items-center gap-8 mt-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-          >
-            <div className="flex items-center gap-3">
-              <div className="text-3xl font-bold text-amber">50+</div>
-              <div className="text-sm text-gray-300">Years of Excellence</div>
-            </div>
-            <div className="w-px h-10 bg-white/20" />
-            <div className="flex items-center gap-3">
-              <div className="text-3xl font-bold text-amber">100+</div>
-              <div className="text-sm text-gray-300">Test Parameters</div>
-            </div>
-            <div className="w-px h-10 bg-white/20" />
-            <div className="flex items-center gap-3">
-              <div className="text-3xl font-bold text-amber">9</div>
-              <div className="text-sm text-gray-300">ISO Standards</div>
-            </div>
-          </motion.div>
         </motion.div>
       </div>
       
@@ -186,30 +149,7 @@ const Quality = () => (
       </motion.div>
     </section>
 
-    {/* Quick Info Bar - NEW */}
-    <div className="bg-gray-900 border-y border-gray-800">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-wrap items-center justify-between py-4">
-          <div className="flex items-center gap-2 text-gray-400">
-            <Shield className="w-4 h-4 text-amber" />
-            <span className="text-sm">ISO 9001:2015 Certified</span>
-          </div>
-          <div className="flex items-center gap-2 text-gray-400">
-            <Microscope className="w-4 h-4 text-amber" />
-            <span className="text-sm">NABL Accredited Lab</span>
-          </div>
-          <div className="flex items-center gap-2 text-gray-400">
-            <Clock className="w-4 h-4 text-amber" />
-            <span className="text-sm">24/7 Quality Monitoring</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-amber font-semibold text-sm">Made in India</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    {/* Certifications Banner - Updated colors */}
+    {/* Certifications Banner */}
     <section className="py-16 bg-gradient-to-r from-[#5a0e1a] to-[#7a1f2b] relative overflow-hidden">
       <div 
         className="absolute inset-0 opacity-10"
@@ -231,21 +171,19 @@ const Quality = () => (
           </div>
         </ScrollReveal>
 
-        <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-6" staggerDelay={0.1}>
+        <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {certifications.map((cert) => (
             <StaggerItem key={cert.name}>
               <motion.div 
                 className="text-center group"
                 whileHover={{ y: -5 }}
-                transition={{ type: "spring", stiffness: 300 }}
               >
                 <div className="relative inline-block">
-                  <div className="absolute inset-0 bg-amber/20 blur-xl rounded-full group-hover:bg-amber/30 transition-all duration-300" />
-                  <div className="relative w-16 h-16 mx-auto mb-4 rounded-full bg-white/10 flex items-center justify-center border border-white/20 group-hover:border-amber/50 group-hover:bg-amber/20 transition-all duration-300">
-                    <cert.icon className="w-7 h-7 text-amber group-hover:scale-110 transition-transform duration-300" />
+                  <div className="relative w-20 h-20 mx-auto mb-4 rounded-full bg-white/10 flex items-center justify-center border border-white/20 group-hover:border-amber/50 group-hover:bg-amber/20 transition-all duration-300">
+                    <cert.icon className="w-8 h-8 text-amber" />
                   </div>
                 </div>
-                <h3 className="text-white font-bold text-sm mb-1">{cert.name}</h3>
+                <h3 className="text-white font-bold text-base mb-1">{cert.name}</h3>
                 <p className="text-white/60 text-xs">{cert.description}</p>
               </motion.div>
             </StaggerItem>
@@ -257,6 +195,7 @@ const Quality = () => (
     {/* QUALITY CONTROL SECTION - COMPLETELY UNTOUCHED */}
     <section className="section-padding bg-white">
       <div className="max-w-7xl mx-auto px-6">
+        {/* Quality Control & R&D */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
           <ScrollReveal>
             <div>
@@ -278,7 +217,7 @@ const Quality = () => (
           </ScrollReveal>
         </div>
 
-        {/* State of the Art Facilities - UNTOUCHED */}
+        {/* State of the Art Facilities */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
           <ScrollReveal>
             <div className="rounded-2xl overflow-hidden group order-2 lg:order-1 shadow-xl">
@@ -299,7 +238,7 @@ const Quality = () => (
           </ScrollReveal>
         </div>
 
-        {/* Customer First - UNTOUCHED */}
+        {/* Customer First */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
           <ScrollReveal>
             <div>
@@ -320,7 +259,7 @@ const Quality = () => (
           </ScrollReveal>
         </div>
 
-        {/* Testing Parameters - UNTOUCHED */}
+        {/* Testing Parameters */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <ScrollReveal>
             <div className="rounded-2xl overflow-hidden group shadow-xl">
@@ -332,7 +271,7 @@ const Quality = () => (
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 border-l-4 border-amber pl-4">
                 Lubricants & Grease Testing Includes:
               </h2>
-              <StaggerContainer className="grid grid-cols-2 gap-3" staggerDelay={0.05}>
+              <StaggerContainer className="grid grid-cols-2 gap-3">
                 {testingParams.map((param) => (
                   <StaggerItem key={param}>
                     <div className="flex items-center gap-2 text-gray-700 bg-gray-50 px-3 py-2 rounded-lg">
@@ -345,89 +284,6 @@ const Quality = () => (
             </div>
           </ScrollReveal>
         </div>
-      </div>
-    </section>
-
-    {/* Quality Stats Section - NEW */}
-    <section className="py-16 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-6">
-        <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {stats.map((stat, index) => (
-            <StaggerItem key={stat.label}>
-              <div className="bg-white rounded-2xl p-6 text-center border border-gray-200 shadow-lg">
-                <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-amber/10 flex items-center justify-center">
-                  <stat.icon className="w-7 h-7 text-amber" />
-                </div>
-                <div className="text-3xl md:text-4xl font-bold text-gray-900 mb-1">{stat.value}</div>
-                <div className="text-sm text-gray-600">{stat.label}</div>
-              </div>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
-      </div>
-    </section>
-
-    {/* Excellence Banner - Updated colors */}
-    <section className="relative overflow-hidden py-20">
-      <div className="absolute inset-0">
-        <img src={qualityLab} alt="Laboratory" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/95 to-gray-900/90" />
-      </div>
-      
-      <div className="relative max-w-5xl mx-auto text-center px-6">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <div className="inline-flex items-center gap-2 bg-amber/20 px-4 py-2 rounded-full mb-6">
-            <Sparkles className="w-4 h-4 text-amber" />
-            <span className="text-amber text-sm font-semibold">Our Promise</span>
-          </div>
-          
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-            Committed to{' '}
-            <span className="text-amber relative">
-              Excellence
-              <motion.span 
-                className="absolute -bottom-2 left-0 w-full h-1 bg-amber/50"
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                viewport={{ once: true }}
-              />
-            </span>
-          </h2>
-          
-          <p className="text-white/80 text-lg max-w-2xl mx-auto leading-relaxed">
-            Every batch, every product, every delivery — tested, verified, and certified 
-            to meet the highest international standards of quality and performance.
-          </p>
-          
-          <motion.div 
-            className="flex items-center justify-center gap-4 mt-10"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            <div className="flex items-center gap-2">
-              <CheckCircle className="w-5 h-5 text-amber" />
-              <span className="text-white/80">100% Batch Testing</span>
-            </div>
-            <div className="w-px h-5 bg-white/20" />
-            <div className="flex items-center gap-2">
-              <Star className="w-5 h-5 text-amber" />
-              <span className="text-white/80">ISO Certified</span>
-            </div>
-            <div className="w-px h-5 bg-white/20" />
-            <div className="flex items-center gap-2">
-              <Shield className="w-5 h-5 text-amber" />
-              <span className="text-white/80">5 Year Warranty</span>
-            </div>
-          </motion.div>
-        </motion.div>
       </div>
     </section>
   </div>
