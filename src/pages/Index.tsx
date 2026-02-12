@@ -63,9 +63,9 @@ const processSteps = [
 ];
 
 const clients = [
-  "Tata Steel", "Reliance Industries", "JSW Steel", "Hindalco", "Mahindra",
-  "Bajaj Auto", "Godrej Industries", "Larsen & Toubro", "Thermax", "BHEL",
-  "ACC Cement", "Grasim Industries",
+  "Assian Paints", "Reliance Industries", "CEAT Tyres", " Saint Gobain", "Mahindra",
+  "Pidilit", "Godrej Industries", "Larsen & Toubro", "Technocraft Indutry", "BHEL",
+  "ACC Cement", " KCIPL",
 ];
 
 const achievements = [
@@ -77,7 +77,7 @@ const achievements = [
 
 const facilities = [
   { icon: MapPin, title: "Navi Mumbai", desc: "Corporate Headquarters & Manufacturing" },
-  { icon: Building2, title: "5+ Acres", desc: "State-of-the-art facility" },
+  { icon: Building2, title: "50000 sq. Ft.", desc: "State-of-the-art facility" },
   { icon: Package, title: "10,000 KL", desc: "Storage Capacity" },
   { icon: Settings, title: "5 Production Lines", desc: "Advanced blending units" },
 ];
@@ -195,7 +195,7 @@ const Index = () => {
                   World-Class Manufacturing Facility
                 </h2>
                 <p className="text-gray-600 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8">
-                  Strategically located in Navi Mumbai, our 50+ acre facility houses state-of-the-art 
+                  Strategically located in Navi Mumbai, our 50000 sq. Ft. facility houses state-of-the-art 
                   blending units, quality control laboratories, and automated packaging lines.
                 </p>
                 <div className="grid grid-cols-2 gap-4 sm:gap-5 md:gap-6">
@@ -226,8 +226,8 @@ const Index = () => {
                       <Building2 className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-amber" />
                     </div>
                     <div>
-                      <div className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900">50+</div>
-                      <div className="text-[10px] sm:text-xs text-gray-500">Acres</div>
+                      <div className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900">50000+</div>
+                      <div className="text-[10px] sm:text-xs text-gray-500">sq. Ft.</div>
                     </div>
                   </div>
                 </div>

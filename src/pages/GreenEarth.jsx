@@ -268,16 +268,18 @@ const GreenEarth = () => {
     <div style={{ 
       minHeight: "100vh", 
       backgroundColor: "#f9fafb",
-      overflowX: "hidden", // ONLY ADDED: prevent horizontal scroll
-      width: "100%" // ONLY ADDED: ensure full width
+      overflowX: "hidden",
+      width: "100%"
     }}>
-      {/* Hero Slideshow - ONLY SCALING, NO LAYOUT CHANGE */}
+      {/* Hero Slideshow - FULLY FIXED FOR MOBILE */}
       <section 
         ref={heroRef} 
         style={{ 
           position: "relative", 
           width: "100%", 
-          height: "90vh", 
+          height: "100vh", 
+          maxHeight: "800px",
+          minHeight: "500px",
           overflow: "hidden", 
           backgroundColor: "#561C24" 
         }}
@@ -326,25 +328,27 @@ const GreenEarth = () => {
               alignItems: "center", 
               justifyContent: "center", 
               textAlign: "center", 
-              padding: "0 20px",
+              padding: "0 16px",
               opacity: i === 0 ? 1 : 0,
               transition: "opacity 1s"
             }}
           >
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "20px" }}>
-              <Leaf style={{ width: "32px", height: "32px", color: "#4ade80" }} />
-              <Globe style={{ width: "28px", height: "28px", color: "#fef3c7" }} />
-              <Leaf style={{ width: "32px", height: "32px", transform: "scaleX(-1)", color: "#4ade80" }} />
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", marginBottom: "16px", flexWrap: "wrap" }}>
+              <Leaf style={{ width: "28px", height: "28px", color: "#4ade80" }} />
+              <Globe style={{ width: "24px", height: "24px", color: "#fef3c7" }} />
+              <Leaf style={{ width: "28px", height: "28px", transform: "scaleX(-1)", color: "#4ade80" }} />
             </div>
             
             <h1 style={{ 
-              fontSize: "clamp(1.5rem, 6vw, 1.75rem)", // ONLY ADDED: responsive font
+              fontSize: "clamp(1.5rem, 7vw, 1.75rem)",
               fontWeight: 800, 
               letterSpacing: "0.05em", 
               textTransform: "uppercase",
               marginBottom: "12px", 
               color: "#fef3c7",
-              textShadow: "0 2px 4px rgba(0,0,0,0.3)"
+              textShadow: "0 2px 4px rgba(0,0,0,0.3)",
+              wordBreak: "break-word",
+              maxWidth: "100%"
             }}>
               {slide.title}
             </h1>
@@ -352,21 +356,25 @@ const GreenEarth = () => {
             <div style={{ width: "60px", height: "3px", backgroundColor: "#f59e0b", margin: "0 auto 16px" }} />
             
             <p style={{ 
-              fontSize: "clamp(0.85rem, 4vw, 1rem)", // ONLY ADDED: responsive font
+              fontSize: "clamp(0.85rem, 4vw, 1rem)",
               fontWeight: 600,
               letterSpacing: "0.025em",
               marginBottom: "12px", 
-              color: "#fde68a"
+              color: "#fde68a",
+              wordBreak: "break-word",
+              maxWidth: "100%"
             }}>
               {slide.subtitle}
             </p>
             
             <p style={{ 
-              fontSize: "clamp(0.7rem, 3vw, 0.8rem)", // ONLY ADDED: responsive font
+              fontSize: "clamp(0.7rem, 3.5vw, 0.8rem)",
               maxWidth: "600px",
               margin: "0 auto",
               lineHeight: 1.6,
-              color: "rgba(254,243,199,0.85)"
+              color: "rgba(254,243,199,0.85)",
+              wordBreak: "break-word",
+              padding: "0 8px"
             }}>
               At Tolani Petroleum, we believe that responsible energy production and environmental
               stewardship go hand in hand.
@@ -382,7 +390,10 @@ const GreenEarth = () => {
           transform: "translateX(-50%)", 
           display: "flex", 
           gap: "8px", 
-          zIndex: 10 
+          zIndex: 10,
+          padding: "0 16px",
+          flexWrap: "wrap",
+          justifyContent: "center"
         }}>
           {heroSlides.map((_, i) => (
             <button
@@ -408,14 +419,15 @@ const GreenEarth = () => {
                 transition: "all 0.3s",
                 border: "none",
                 cursor: "pointer",
-                padding: 0
+                padding: 0,
+                minWidth: i === heroIndex ? "24px" : "8px"
               }}
             />
           ))}
         </div>
       </section>
 
-      {/* Stats Section - ONLY RESPONSIVE GRID, NO LAYOUT CHANGE */}
+      {/* Stats Section - FIXED MOBILE GRID */}
       <div 
         ref={statsRef} 
         style={{ 
@@ -423,43 +435,49 @@ const GreenEarth = () => {
           backgroundColor: "#fef3c7" 
         }}
       >
-        <div style={{ 
-          maxWidth: "1000px", 
-          margin: "0 auto", 
-          display: "grid", 
-          gridTemplateColumns: "repeat(4, 1fr)", 
-          gap: "16px",
-          // ONLY ADDED: mobile fallback using media query in style object
-          "@media (max-width: 640px)": {
-            gridTemplateColumns: "repeat(2, 1fr)"
+        <style jsx>{`
+          .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            max-width: 1000px;
+            margin: 0 auto;
           }
-        }}>
+          @media (max-width: 640px) {
+            .stats-grid {
+              grid-template-columns: repeat(2, 1fr);
+              gap: 12px;
+            }
+          }
+        `}</style>
+        <div className="stats-grid">
           {stats.map((stat, i) => (
             <div 
               key={i}
               ref={(el) => { statCardsRef.current[i] = el; }}
               style={{ 
                 textAlign: "center", 
-                padding: "20px 12px", 
+                padding: "16px 8px", 
                 borderRadius: "12px", 
                 backgroundColor: "#561C24",
                 boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-                minHeight: "120px",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
-                alignItems: "center"
+                alignItems: "center",
+                width: "100%",
+                minHeight: "100px"
               }}
             >
-              <stat.icon style={{ width: "28px", height: "28px", margin: "0 auto 8px", color: "#fef3c7" }} />
-              <p style={{ fontSize: "clamp(1.2rem, 5vw, 1.5rem)", fontWeight: 800, color: "#fef3c7", margin: "4px 0" }}>{stat.value}</p>
-              <p style={{ fontSize: "clamp(0.6rem, 2.5vw, 0.7rem)", letterSpacing: "0.025em", color: "#fde68a", lineHeight: 1.2 }}>{stat.label}</p>
+              <stat.icon style={{ width: "24px", height: "24px", margin: "0 auto 6px", color: "#fef3c7" }} />
+              <p style={{ fontSize: "clamp(1.1rem, 5vw, 1.4rem)", fontWeight: 800, color: "#fef3c7", margin: "2px 0", lineHeight: 1.2 }}>{stat.value}</p>
+              <p style={{ fontSize: "clamp(0.55rem, 3vw, 0.65rem)", letterSpacing: "0.025em", color: "#fde68a", lineHeight: 1.2, padding: "0 2px" }}>{stat.label}</p>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Why Save Petroleum - NO LAYOUT CHANGE, ONLY TEXT SCALING */}
+      {/* Why Save Petroleum - FIXED MOBILE LAYOUT */}
       <section style={{ 
         padding: "60px 16px", 
         backgroundColor: "#ffffff" 
@@ -467,73 +485,93 @@ const GreenEarth = () => {
         <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
           <h2 style={{ 
             textAlign: "center", 
-            fontSize: "clamp(1.3rem, 6vw, 1.5rem)", // ONLY ADDED: responsive font
+            fontSize: "clamp(1.3rem, 6vw, 1.5rem)",
             fontWeight: 700, 
             letterSpacing: "0.05em", 
             textTransform: "uppercase",
             marginBottom: "12px", 
-            color: "#561C24"
+            color: "#561C24",
+            wordBreak: "break-word",
+            padding: "0 8px"
           }}>
             Why Save Petroleum?
           </h2>
           
           <p style={{ 
             textAlign: "center", 
-            fontSize: "clamp(0.75rem, 3.5vw, 0.8rem)", // ONLY ADDED: responsive font
+            fontSize: "clamp(0.75rem, 3.5vw, 0.8rem)",
             marginBottom: "32px", 
             maxWidth: "600px", 
             margin: "0 auto 32px", 
             lineHeight: 1.6, 
-            color: "#6D2932"
+            color: "#6D2932",
+            padding: "0 12px"
           }}>
             Petroleum is finite. Conserving it is an environmental, economic, and social necessity.
           </p>
           
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "20px" }}>
+          <style jsx>{`
+            .save-grid {
+              display: grid;
+              grid-template-columns: repeat(2, 1fr);
+              gap: 20px;
+            }
+            @media (max-width: 640px) {
+              .save-grid {
+                grid-template-columns: repeat(1, 1fr);
+                gap: 16px;
+              }
+            }
+          `}</style>
+          <div className="save-grid">
             <div style={{ 
-              padding: "24px", 
+              padding: "20px 16px", 
               borderRadius: "12px", 
               backgroundColor: "rgba(86,28,36,0.05)",
-              border: "1px solid rgba(86,28,36,0.1)"
+              border: "1px solid rgba(86,28,36,0.1)",
+              width: "100%"
             }}>
               <h3 style={{ 
-                fontSize: "clamp(0.9rem, 4vw, 1rem)", // ONLY ADDED: responsive font
+                fontSize: "clamp(0.9rem, 4vw, 1rem)",
                 fontWeight: 700, 
                 marginBottom: "12px", 
                 display: "flex", 
                 alignItems: "center", 
                 gap: "6px", 
-                color: "#561C24" 
+                color: "#561C24",
+                flexWrap: "wrap"
               }}>
-                <Factory style={{ width: "20px", height: "20px" }} /> The Reality
+                <Factory style={{ width: "18px", height: "18px" }} /> The Reality
               </h3>
               <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
                 {["50-60 years of reserves left", "100M barrels daily", "30% of CO₂ emissions", "Oil spills devastate ecosystems"].map((item, idx) => (
-                  <li key={idx} style={{ marginBottom: "6px", fontSize: "clamp(0.7rem, 3vw, 0.75rem)", lineHeight: 1.4, color: "#6D2932" }}>• {item}</li>
+                  <li key={idx} style={{ marginBottom: "6px", fontSize: "clamp(0.7rem, 3.5vw, 0.75rem)", lineHeight: 1.4, color: "#6D2932", wordBreak: "break-word" }}>• {item}</li>
                 ))}
               </ul>
             </div>
             
             <div style={{ 
-              padding: "24px", 
+              padding: "20px 16px", 
               borderRadius: "12px", 
               backgroundColor: "rgba(86,28,36,0.05)",
-              border: "1px solid rgba(86,28,36,0.1)"
+              border: "1px solid rgba(86,28,36,0.1)",
+              width: "100%"
             }}>
               <h3 style={{ 
-                fontSize: "clamp(0.9rem, 4vw, 1rem)", // ONLY ADDED: responsive font
+                fontSize: "clamp(0.9rem, 4vw, 1rem)",
                 fontWeight: 700, 
                 marginBottom: "12px", 
                 display: "flex", 
                 alignItems: "center", 
                 gap: "6px", 
-                color: "#561C24" 
+                color: "#561C24",
+                flexWrap: "wrap"
               }}>
-                <Heart style={{ width: "20px", height: "20px" }} /> The Solution
+                <Heart style={{ width: "18px", height: "18px" }} /> The Solution
               </h3>
               <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
                 {["Invest in renewables", "Fuel-efficient engines", "Biodegradable alternatives", "Strict emission controls"].map((item, idx) => (
-                  <li key={idx} style={{ marginBottom: "6px", fontSize: "clamp(0.7rem, 3vw, 0.75rem)", lineHeight: 1.4, color: "#6D2932" }}>• {item}</li>
+                  <li key={idx} style={{ marginBottom: "6px", fontSize: "clamp(0.7rem, 3.5vw, 0.75rem)", lineHeight: 1.4, color: "#6D2932", wordBreak: "break-word" }}>• {item}</li>
                 ))}
               </ul>
             </div>
@@ -541,7 +579,7 @@ const GreenEarth = () => {
         </div>
       </section>
 
-      {/* Our Green Initiatives - NO LAYOUT CHANGE, ONLY RESPONSIVE GRID */}
+      {/* Our Green Initiatives - FIXED MOBILE GRID */}
       <section 
         ref={initiativesRef} 
         style={{ 
@@ -552,38 +590,49 @@ const GreenEarth = () => {
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <h2 style={{ 
             textAlign: "center", 
-            fontSize: "clamp(1.3rem, 6vw, 1.5rem)", // ONLY ADDED: responsive font
+            fontSize: "clamp(1.3rem, 6vw, 1.5rem)",
             fontWeight: 700, 
             letterSpacing: "0.05em", 
             textTransform: "uppercase",
             marginBottom: "8px", 
-            color: "#fef3c7"
+            color: "#fef3c7",
+            wordBreak: "break-word",
+            padding: "0 8px"
           }}>
             Our Green Initiatives
           </h2>
           
           <p style={{ 
             textAlign: "center", 
-            fontSize: "clamp(0.75rem, 3.5vw, 0.8rem)", // ONLY ADDED: responsive font
+            fontSize: "clamp(0.75rem, 3.5vw, 0.8rem)",
             letterSpacing: "0.025em",
             marginBottom: "40px", 
-            color: "#fde68a"
+            color: "#fde68a",
+            padding: "0 12px"
           }}>
             Sustainable practices for a cleaner tomorrow
           </p>
           
-          <div style={{ 
-            display: "grid", 
-            gridTemplateColumns: "repeat(3, 1fr)", 
-            gap: "20px",
-            // ONLY ADDED: mobile fallback
-            "@media (max-width: 768px)": {
-              gridTemplateColumns: "repeat(2, 1fr)"
-            },
-            "@media (max-width: 480px)": {
-              gridTemplateColumns: "repeat(1, 1fr)"
+          <style jsx>{`
+            .initiatives-grid {
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 20px;
             }
-          }}>
+            @media (max-width: 768px) {
+              .initiatives-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+              }
+            }
+            @media (max-width: 480px) {
+              .initiatives-grid {
+                grid-template-columns: repeat(1, 1fr);
+                gap: 16px;
+              }
+            }
+          `}</style>
+          <div className="initiatives-grid">
             {initiatives.map((item, i) => (
               <div
                 key={i}
@@ -594,11 +643,13 @@ const GreenEarth = () => {
                   backgroundColor: "rgba(254,243,199,0.1)",
                   border: `1px solid ${item.color}40`,
                   boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-                  minHeight: "180px",
                   display: "flex",
                   flexDirection: "column",
                   transition: "all 0.3s ease",
-                  cursor: "pointer"
+                  cursor: "pointer",
+                  width: "100%",
+                  height: "100%",
+                  boxSizing: "border-box"
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = "translateY(-5px)";
@@ -610,36 +661,51 @@ const GreenEarth = () => {
                 }}
               >
                 <div style={{ 
-                  width: "40px", 
-                  height: "40px", 
-                  borderRadius: "12px", 
+                  width: "36px", 
+                  height: "36px", 
+                  borderRadius: "10px", 
                   backgroundColor: `${item.color}20`,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   marginBottom: "12px"
                 }}>
-                  <item.icon style={{ width: "22px", height: "22px", color: item.color }} />
+                  <item.icon style={{ width: "20px", height: "20px", color: item.color }} />
                 </div>
                 
-                <h3 style={{ fontSize: "clamp(0.85rem, 3.5vw, 0.95rem)", fontWeight: 700, color: "#fef3c7", marginBottom: "8px" }}>{item.title}</h3>
+                <h3 style={{ 
+                  fontSize: "clamp(0.85rem, 4vw, 0.95rem)", 
+                  fontWeight: 700, 
+                  color: "#fef3c7", 
+                  marginBottom: "6px",
+                  wordBreak: "break-word" 
+                }}>
+                  {item.title}
+                </h3>
                 
                 <div style={{ 
                   width: "24px", 
                   height: "2px", 
                   backgroundColor: item.color, 
-                  margin: "4px 0 10px",
+                  margin: "4px 0 8px",
                   borderRadius: "2px"
                 }} />
                 
-                <p style={{ fontSize: "clamp(0.7rem, 3vw, 0.75rem)", lineHeight: 1.4, color: "#fde68a", flex: 1 }}>{item.description}</p>
+                <p style={{ 
+                  fontSize: "clamp(0.7rem, 3.5vw, 0.75rem)", 
+                  lineHeight: 1.4, 
+                  color: "#fde68a", 
+                  wordBreak: "break-word" 
+                }}>
+                  {item.description}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Conservation Tips - NO LAYOUT CHANGE, ONLY RESPONSIVE GRID */}
+      {/* Conservation Tips - FIXED MOBILE GRID */}
       <section 
         ref={tipsRef} 
         style={{ 
@@ -650,58 +716,68 @@ const GreenEarth = () => {
         <div style={{ maxWidth: "800px", margin: "0 auto" }}>
           <h2 style={{ 
             textAlign: "center", 
-            fontSize: "clamp(1.3rem, 6vw, 1.5rem)", // ONLY ADDED: responsive font
+            fontSize: "clamp(1.3rem, 6vw, 1.5rem)",
             fontWeight: 700, 
             letterSpacing: "0.05em", 
             textTransform: "uppercase",
             marginBottom: "8px", 
-            color: "#561C24"
+            color: "#561C24",
+            wordBreak: "break-word",
+            padding: "0 8px"
           }}>
             How You Can Help
           </h2>
           
           <p style={{ 
             textAlign: "center", 
-            fontSize: "clamp(0.75rem, 3.5vw, 0.8rem)", // ONLY ADDED: responsive font
+            fontSize: "clamp(0.75rem, 3.5vw, 0.8rem)",
             marginBottom: "32px", 
-            color: "#6D2932"
+            color: "#6D2932",
+            padding: "0 12px"
           }}>
             Small actions create big change
           </p>
           
-          <div style={{ 
-            display: "grid", 
-            gridTemplateColumns: "repeat(2, 1fr)", 
-            gap: "12px",
-            // ONLY ADDED: mobile fallback
-            "@media (max-width: 640px)": {
-              gridTemplateColumns: "repeat(1, 1fr)"
+          <style jsx>{`
+            .tips-grid {
+              display: grid;
+              grid-template-columns: repeat(2, 1fr);
+              gap: 12px;
             }
-          }}>
+            @media (max-width: 640px) {
+              .tips-grid {
+                grid-template-columns: repeat(1, 1fr);
+                gap: 12px;
+              }
+            }
+          `}</style>
+          <div className="tips-grid">
             {conservationTips.map((tip, i) => (
               <div
                 key={i}
                 ref={(el) => { tipItemsRef.current[i] = el; }}
                 style={{ 
                   display: "flex", 
-                  alignItems: "center", 
-                  gap: "12px", 
-                  padding: "14px 16px", 
-                  borderRadius: "12px", 
+                  alignItems: "flex-start", 
+                  gap: "10px", 
+                  padding: "12px 14px", 
+                  borderRadius: "10px", 
                   backgroundColor: "rgba(86,28,36,0.08)",
-                  borderLeft: `4px solid #${((i * 30) % 360).toString(16).padStart(6, '0')}`
+                  borderLeft: `4px solid #${((i * 30) % 360).toString(16).padStart(6, '0')}`,
+                  width: "100%",
+                  boxSizing: "border-box"
                 }}
               >
                 <span
                   style={{ 
                     flexShrink: 0,
-                    width: "28px", 
-                    height: "28px", 
+                    width: "24px", 
+                    height: "24px", 
                     borderRadius: "9999px", 
                     display: "flex", 
                     alignItems: "center", 
                     justifyContent: "center", 
-                    fontSize: "0.7rem", 
+                    fontSize: "0.65rem", 
                     fontWeight: 700,
                     backgroundColor: "#561C24", 
                     color: "#fef3c7" 
@@ -709,14 +785,22 @@ const GreenEarth = () => {
                 >
                   {i + 1}
                 </span>
-                <p style={{ fontSize: "clamp(0.75rem, 3vw, 0.8rem)", lineHeight: 1.4, color: "#561C24", flex: 1 }}>{tip}</p>
+                <p style={{ 
+                  fontSize: "clamp(0.75rem, 3.5vw, 0.8rem)", 
+                  lineHeight: 1.4, 
+                  color: "#561C24", 
+                  wordBreak: "break-word",
+                  margin: 0
+                }}>
+                  {tip}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Transportation Section - NO LAYOUT CHANGE, ONLY RESPONSIVE GRID */}
+      {/* Transportation Section - FIXED MOBILE GRID */}
       <section
         ref={transportRef}
         style={{
@@ -727,37 +811,41 @@ const GreenEarth = () => {
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <h2 style={{ 
             textAlign: "center", 
-            fontSize: "clamp(1.3rem, 6vw, 1.5rem)", // ONLY ADDED: responsive font
+            fontSize: "clamp(1.3rem, 6vw, 1.5rem)",
             fontWeight: 700, 
             letterSpacing: "0.05em", 
             textTransform: "uppercase",
             marginBottom: "8px", 
-            color: "#fef3c7"
+            color: "#fef3c7",
+            wordBreak: "break-word",
+            padding: "0 8px"
           }}>
             Transportation & Logistics
           </h2>
           
           <p style={{ 
             textAlign: "center", 
-            fontSize: "clamp(0.75rem, 3.5vw, 0.8rem)", // ONLY ADDED: responsive font
+            fontSize: "clamp(0.75rem, 3.5vw, 0.8rem)",
             letterSpacing: "0.025em",
             marginBottom: "40px", 
-            color: "#fde68a"
+            color: "#fde68a",
+            padding: "0 12px"
           }}>
             Safe, efficient, and eco-conscious delivery
           </p>
 
-          {/* Truck + description - NO LAYOUT CHANGE */}
+          {/* Truck + description - FIXED MOBILE */}
           <div style={{ 
             display: "flex", 
             flexDirection: "column", 
             alignItems: "center", 
-            gap: "32px", 
-            marginBottom: "40px" 
+            gap: "24px", 
+            marginBottom: "40px",
+            width: "100%"
           }}>
             <div 
               ref={truckRef} 
-              style={{ width: "100%", maxWidth: "280px" }}
+              style={{ width: "100%", maxWidth: "240px" }}
             >
               <div style={{ 
                 width: "100%", 
@@ -767,19 +855,20 @@ const GreenEarth = () => {
                 border: "3px solid rgba(245,158,11,0.3)"
               }}>
                 <img
-                  src={truckImg} // FIXED: now works with import
+                  src={truckImg}
                   alt="Tolani Petroleum Transportation Truck"
                   style={{ width: "100%", height: "auto", display: "block" }}
                 />
               </div>
             </div>
             
-            <div style={{ textAlign: "center", maxWidth: "600px" }}>
+            <div style={{ textAlign: "center", maxWidth: "600px", padding: "0 8px" }}>
               <h3 style={{ 
-                fontSize: "clamp(1rem, 4vw, 1.1rem)", // ONLY ADDED: responsive font
+                fontSize: "clamp(1rem, 5vw, 1.1rem)",
                 fontWeight: 700, 
                 marginBottom: "12px", 
-                color: "#fef3c7"
+                color: "#fef3c7",
+                wordBreak: "break-word"
               }}>
                 Our Fleet, Your Trust
               </h3>
@@ -787,9 +876,10 @@ const GreenEarth = () => {
               <div style={{ width: "40px", height: "3px", backgroundColor: "#f59e0b", margin: "0 auto 16px" }} />
               
               <p style={{ 
-                fontSize: "clamp(0.75rem, 3vw, 0.8rem)", // ONLY ADDED: responsive font
+                fontSize: "clamp(0.75rem, 3.5vw, 0.8rem)",
                 lineHeight: 1.6, 
-                color: "#fde68a"
+                color: "#fde68a",
+                wordBreak: "break-word"
               }}>
                 Modern, eco-friendly fleet with real-time GPS monitoring and AI-powered route optimization 
                 for minimal environmental impact.
@@ -797,40 +887,49 @@ const GreenEarth = () => {
             </div>
           </div>
 
-          {/* Transport cards - NO LAYOUT CHANGE, ONLY RESPONSIVE GRID */}
-          <div style={{ 
-            display: "grid", 
-            gridTemplateColumns: "repeat(4, 1fr)", 
-            gap: "16px", 
-            marginBottom: "40px",
-            // ONLY ADDED: mobile fallback
-            "@media (max-width: 768px)": {
-              gridTemplateColumns: "repeat(2, 1fr)"
-            },
-            "@media (max-width: 480px)": {
-              gridTemplateColumns: "repeat(1, 1fr)"
+          {/* Transport cards - FIXED MOBILE GRID */}
+          <style jsx>{`
+            .transport-grid {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: 16px;
+              margin-bottom: 40px;
             }
-          }}>
+            @media (max-width: 768px) {
+              .transport-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 14px;
+              }
+            }
+            @media (max-width: 480px) {
+              .transport-grid {
+                grid-template-columns: repeat(1, 1fr);
+                gap: 14px;
+              }
+            }
+          `}</style>
+          <div className="transport-grid">
             {transportFeatures.map((feat, i) => (
               <div
                 key={i}
                 ref={(el) => { transportCardsRef.current[i] = el; }}
                 style={{ 
-                  padding: "20px", 
+                  padding: "18px 12px", 
                   borderRadius: "16px", 
                   textAlign: "center", 
                   backgroundColor: "rgba(254,243,199,0.1)",
                   border: `1px solid ${feat.color}40`,
                   boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-                  minHeight: "140px",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "center",
                   alignItems: "center",
-                  transition: "all 0.3s ease"
+                  transition: "all 0.3s ease",
+                  width: "100%",
+                  boxSizing: "border-box"
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "scale(1.05) rotate(2deg)";
+                  e.currentTarget.style.transform = "scale(1.03) rotate(1deg)";
                   e.currentTarget.style.boxShadow = `0 8px 24px ${feat.color}40`;
                 }}
                 onMouseLeave={(e) => {
@@ -839,37 +938,57 @@ const GreenEarth = () => {
                 }}
               >
                 <div style={{ 
-                  width: "48px", 
-                  height: "48px", 
+                  width: "44px", 
+                  height: "44px", 
                   borderRadius: "12px", 
                   backgroundColor: `${feat.color}20`,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  marginBottom: "12px"
+                  marginBottom: "10px"
                 }}>
-                  <feat.icon style={{ width: "24px", height: "24px", color: feat.color }} />
+                  <feat.icon style={{ width: "22px", height: "22px", color: feat.color }} />
                 </div>
                 
-                <h3 style={{ fontSize: "clamp(0.85rem, 3vw, 0.9rem)", fontWeight: 700, color: "#fef3c7", marginBottom: "6px" }}>{feat.title}</h3>
+                <h3 style={{ 
+                  fontSize: "clamp(0.85rem, 4vw, 0.9rem)", 
+                  fontWeight: 700, 
+                  color: "#fef3c7", 
+                  marginBottom: "6px",
+                  wordBreak: "break-word" 
+                }}>
+                  {feat.title}
+                </h3>
                 
-                <div style={{ width: "20px", height: "2px", backgroundColor: feat.color, margin: "0 auto 8px", borderRadius: "2px" }} />
+                <div style={{ width: "20px", height: "2px", backgroundColor: feat.color, margin: "0 auto 6px", borderRadius: "2px" }} />
                 
-                <p style={{ fontSize: "clamp(0.65rem, 2.5vw, 0.7rem)", lineHeight: 1.3, color: "#fde68a" }}>{feat.description}</p>
+                <p style={{ 
+                  fontSize: "clamp(0.65rem, 3vw, 0.7rem)", 
+                  lineHeight: 1.3, 
+                  color: "#fde68a",
+                  wordBreak: "break-word" 
+                }}>
+                  {feat.description}
+                </p>
               </div>
             ))}
           </div>
 
-          {/* Fleet stats - NO LAYOUT CHANGE, ONLY RESPONSIVE GRID */}
-          <div style={{ 
-            display: "grid", 
-            gridTemplateColumns: "repeat(4, 1fr)", 
-            gap: "12px",
-            // ONLY ADDED: mobile fallback
-            "@media (max-width: 640px)": {
-              gridTemplateColumns: "repeat(2, 1fr)"
+          {/* Fleet stats - FIXED MOBILE GRID */}
+          <style jsx>{`
+            .fleet-grid {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: 12px;
             }
-          }}>
+            @media (max-width: 640px) {
+              .fleet-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+              }
+            }
+          `}</style>
+          <div className="fleet-grid">
             {[
               { value: "200+", label: "Fleet Vehicles", color: "#f59e0b" },
               { value: "50K+", label: "Daily Capacity", color: "#10B981" },
@@ -878,48 +997,53 @@ const GreenEarth = () => {
             ].map((s, i) => (
               <div key={i} style={{ 
                 textAlign: "center", 
-                padding: "16px 12px", 
+                padding: "14px 8px", 
                 borderRadius: "12px", 
                 backgroundColor: "rgba(254,243,199,0.1)",
                 borderLeft: `4px solid ${s.color}`,
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
-                alignItems: "center"
+                alignItems: "center",
+                width: "100%",
+                boxSizing: "border-box"
               }}>
-                <p style={{ fontSize: "clamp(1.1rem, 4vw, 1.3rem)", fontWeight: 800, color: "#fef3c7", margin: "0" }}>{s.value}</p>
-                <p style={{ fontSize: "clamp(0.6rem, 2.5vw, 0.65rem)", letterSpacing: "0.05em", textTransform: "uppercase", color: "#fde68a", marginTop: "4px" }}>{s.label}</p>
+                <p style={{ fontSize: "clamp(1rem, 4.5vw, 1.2rem)", fontWeight: 800, color: "#fef3c7", margin: "0", lineHeight: 1.2 }}>{s.value}</p>
+                <p style={{ fontSize: "clamp(0.55rem, 2.8vw, 0.65rem)", letterSpacing: "0.05em", textTransform: "uppercase", color: "#fde68a", marginTop: "4px", wordBreak: "break-word" }}>{s.label}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Call to Action - NO LAYOUT CHANGE, ONLY TEXT SCALING */}
+      {/* Call to Action - FIXED MOBILE */}
       <section style={{ 
         padding: "60px 16px", 
         textAlign: "center", 
         backgroundColor: "#fef3c7" 
       }}>
-        <div style={{ maxWidth: "500px", margin: "0 auto" }}>
-          <Leaf style={{ width: "48px", height: "48px", margin: "0 auto 20px", color: "#561C24" }} />
+        <div style={{ maxWidth: "500px", margin: "0 auto", padding: "0 8px" }}>
+          <Leaf style={{ width: "40px", height: "40px", margin: "0 auto 16px", color: "#561C24" }} />
           
           <h2 style={{ 
-            fontSize: "clamp(1.3rem, 6vw, 1.5rem)", // ONLY ADDED: responsive font
+            fontSize: "clamp(1.3rem, 6vw, 1.5rem)",
             fontWeight: 700, 
             letterSpacing: "0.05em", 
             textTransform: "uppercase",
             marginBottom: "12px", 
-            color: "#561C24"
+            color: "#561C24",
+            wordBreak: "break-word"
           }}>
             Together for a Greener Tomorrow
           </h2>
           
           <p style={{ 
-            fontSize: "clamp(0.75rem, 3.5vw, 0.8rem)", // ONLY ADDED: responsive font
+            fontSize: "clamp(0.75rem, 3.5vw, 0.8rem)",
             lineHeight: 1.6, 
             marginBottom: "24px", 
-            color: "#6D2932"
+            color: "#6D2932",
+            wordBreak: "break-word",
+            padding: "0 8px"
           }}>
             Join us in our mission to create a cleaner, greener, and more sustainable future.
           </p>
@@ -928,9 +1052,9 @@ const GreenEarth = () => {
             href="/"
             style={{ 
               display: "inline-block",
-              padding: "12px 28px",
+              padding: "12px 24px",
               borderRadius: "8px",
-              fontSize: "clamp(0.75rem, 3vw, 0.8rem)", // ONLY ADDED: responsive font
+              fontSize: "clamp(0.75rem, 3.5vw, 0.8rem)",
               fontWeight: 700,
               letterSpacing: "0.05em",
               textTransform: "uppercase",
@@ -938,7 +1062,9 @@ const GreenEarth = () => {
               color: "#fef3c7",
               textDecoration: "none",
               boxShadow: "0 4px 12px rgba(86,28,36,0.3)",
-              transition: "all 0.3s ease"
+              transition: "all 0.3s ease",
+              maxWidth: "100%",
+              wordBreak: "break-word"
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = "translateY(-3px)";

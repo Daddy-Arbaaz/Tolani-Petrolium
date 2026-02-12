@@ -6,6 +6,7 @@ import {
   Settings, Wrench, FlaskConical, Award, Shield, Clock,
   Truck, CheckCircle, Star, Package, Microscope, Leaf
 } from "lucide-react";
+import { Link } from "react-router-dom"; 
 import barrelsStacked from "@/assets/Gemini_Generated_Image_1ey52o1ey52o1ey5.png";
 import hydraulicOil from "@/assets/hydraulic-oil.jpg";
 import gearOil from "@/assets/gear-oil.jpg";
@@ -92,8 +93,8 @@ const certifications = [
 ];
 
 const applications = [
-  "Automotive Manufacturing", "Steel Plants", "Power Generation", "Cement Industry",
-  "Mining Operations", "Food Processing", "Textile Mills", "Chemical Plants"
+  "Pharmaceuticals", "Steel Plants", "Sugar mill", "Rolling mill",
+  "Mining Operations", "Ice Cube Industry", "Textile Mills", "Chemical Plants"
 ];
 
 const Products = () => {
@@ -452,67 +453,78 @@ const Products = () => {
         </div>
       </section>
 
-      {/* Custom Solutions Banner */}
-      <section className="relative overflow-hidden py-12 sm:py-16 md:py-20">
-        <img src={barrelsRow} alt="Tolani barrels" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/95 via-gray-900/90 to-gray-900/95" />
+     {/* Custom Solutions Banner */}
+<section className="relative overflow-hidden py-12 sm:py-16 md:py-20">
+  <img src={barrelsRow} alt="Tolani barrels" className="absolute inset-0 w-full h-full object-cover" />
+  <div className="absolute inset-0 bg-gradient-to-r from-gray-900/95 via-gray-900/90 to-gray-900/95" />
+  
+  <div 
+    className="absolute inset-0 opacity-5"
+    style={{
+      backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fbbf24' fill-opacity='0.2'%3E%3Cpath d='M50 50h-4v-4h4v4zm0-20h-4v4h4v-4zm-20 0h-4v4h4v-4zm0 20h-4v-4h4v4z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+      backgroundRepeat: 'repeat'
+    }}
+  />
+  
+  <div className="relative max-w-4xl mx-auto text-center px-4 sm:px-6">
+    <ScrollReveal>
+      <div className="inline-flex items-center gap-1.5 sm:gap-2 bg-amber/20 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-4 sm:mb-5 md:mb-6">
+        <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber animate-pulse" />
+        <span className="text-amber text-[10px] sm:text-xs md:text-sm font-semibold tracking-wide">Custom Solutions</span>
+      </div>
+      
+      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 md:mb-6 leading-tight px-2">
+        Need a{' '}
+        <span className="text-amber relative inline-block">
+          Tailor-Made
+          <span className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-2 sm:h-3 bg-amber/30 -z-10" />
+        </span>{' '}
+        Solution?
+      </h2>
+      
+      <p className="text-white/80 text-sm sm:text-base md:text-lg lg:text-xl max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-10 leading-relaxed px-4">
+        Can't find what you need? Our R&D team engineers custom lubricant blends specifically 
+        designed for your unique machinery requirements and operating conditions.
+      </p>
+      
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
+        {/* Request Custom Formulation - Redirects to WhatsApp with name */}
+        <a
+          href="https://wa.me/919920408508?text=Hello%20Tolani%20Petroleum%2C%20I%20would%20like%20to%20request%20a%20custom%20lubricant%20formulation%20for%20my%20specific%20requirements."
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 bg-amber text-gray-900 font-semibold text-xs sm:text-sm md:text-base rounded-full hover:bg-amber/90 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl sm:hover:shadow-2xl hover:shadow-amber/30 flex items-center gap-1.5 sm:gap-2"
+        >
+          Request Custom Formulation
+          <ChevronRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
+        </a>
         
-        <div 
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fbbf24' fill-opacity='0.2'%3E%3Cpath d='M50 50h-4v-4h4v4zm0-20h-4v4h4v-4zm-20 0h-4v4h4v-4zm0 20h-4v-4h4v4z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            backgroundRepeat: 'repeat'
-          }}
-        />
-        
-        <div className="relative max-w-4xl mx-auto text-center px-4 sm:px-6">
-          <ScrollReveal>
-            <div className="inline-flex items-center gap-1.5 sm:gap-2 bg-amber/20 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-4 sm:mb-5 md:mb-6">
-              <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber animate-pulse" />
-              <span className="text-amber text-[10px] sm:text-xs md:text-sm font-semibold tracking-wide">Custom Solutions</span>
-            </div>
-            
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 md:mb-6 leading-tight px-2">
-              Need a{' '}
-              <span className="text-amber relative inline-block">
-                Tailor-Made
-                <span className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-2 sm:h-3 bg-amber/30 -z-10" />
-              </span>{' '}
-              Solution?
-            </h2>
-            
-            <p className="text-white/80 text-sm sm:text-base md:text-lg lg:text-xl max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-10 leading-relaxed px-4">
-              Can't find what you need? Our R&D team engineers custom lubricant blends specifically 
-              designed for your unique machinery requirements and operating conditions.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
-              <button className="group px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 bg-amber text-gray-900 font-semibold text-xs sm:text-sm md:text-base rounded-full hover:bg-amber/90 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl sm:hover:shadow-2xl hover:shadow-amber/30 flex items-center gap-1.5 sm:gap-2">
-                Request Custom Formulation
-                <ChevronRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
-              </button>
-              <button className="px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 border-2 border-white/30 text-white font-semibold text-xs sm:text-sm md:text-base rounded-full hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1">
-                Contact Technical Team
-              </button>
-            </div>
-            
-            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8 mt-8 sm:mt-10 md:mt-12 px-4">
-              <div className="flex items-center gap-1.5 sm:gap-2 text-white/60">
-                <CheckCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 text-amber shrink-0" />
-                <span className="text-[10px] sm:text-xs md:text-sm">ISO 9001:2015</span>
-              </div>
-              <div className="flex items-center gap-1.5 sm:gap-2 text-white/60">
-                <CheckCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 text-amber shrink-0" />
-                <span className="text-[10px] sm:text-xs md:text-sm">50+ Years Experience</span>
-              </div>
-              <div className="flex items-center gap-1.5 sm:gap-2 text-white/60">
-                <CheckCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 text-amber shrink-0" />
-                <span className="text-[10px] sm:text-xs md:text-sm">Made in India</span>
-              </div>
-            </div>
-          </ScrollReveal>
+        {/* Contact Technical Team - Redirects to Contact Page */}
+        <Link
+          to="/contact"
+          className="px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 border-2 border-white/30 text-white font-semibold text-xs sm:text-sm md:text-base rounded-full hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1"
+        >
+          Contact Technical Team
+        </Link>
+      </div>
+      
+      <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8 mt-8 sm:mt-10 md:mt-12 px-4">
+        <div className="flex items-center gap-1.5 sm:gap-2 text-white/60">
+          <CheckCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 text-amber shrink-0" />
+          <span className="text-[10px] sm:text-xs md:text-sm">ISO 9001:2015</span>
         </div>
-      </section>
+        <div className="flex items-center gap-1.5 sm:gap-2 text-white/60">
+          <CheckCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 text-amber shrink-0" />
+          <span className="text-[10px] sm:text-xs md:text-sm">50+ Years Experience</span>
+        </div>
+        <div className="flex items-center gap-1.5 sm:gap-2 text-white/60">
+          <CheckCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 text-amber shrink-0" />
+          <span className="text-[10px] sm:text-xs md:text-sm">Made in India</span>
+        </div>
+      </div>
+    </ScrollReveal>
+  </div>
+</section>
 
       {/* Why Choose Us */}
       <section className="py-12 sm:py-16 md:py-20 bg-white">

@@ -144,7 +144,7 @@ export const Footer = () => (
               </div>
               <div>
                 <p className="text-xs text-gray-400 mb-0.5">Email Addresses</p>
-                <p className="text-sm text-white font-medium">info@tolanipetroleum.com</p>
+                <p className="text-sm text-white font-medium">tolanipetroleum@yahoo.com</p>
                 <p className="text-xs text-gray-400">sales@tolanipetroleum.com</p>
               </div>
             </div>
@@ -169,7 +169,7 @@ export const Footer = () => (
             Stay Connected
           </h4>
           
-          <div className="bg-white/5 rounded-xl p-5 border border-white/10 mb-5">
+          {/* <div className="bg-white/5 rounded-xl p-5 border border-white/10 mb-5">
             <div className="flex items-center gap-3 mb-3">
               <div className="w-10 h-10 rounded-full bg-amber/10 flex items-center justify-center">
                 <Send className="w-5 h-5 text-amber" />
@@ -189,7 +189,7 @@ export const Footer = () => (
                 Subscribe
               </button>
             </div>
-          </div>
+          </div> */}
 
           <a
             href="https://wa.me/919920408508"

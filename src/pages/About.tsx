@@ -1,10 +1,11 @@
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ScrollReveal";
 import { Counter } from "@/components/Counter";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { 
   Shield, Leaf, Microscope, Users, Award, Droplet, Factory, TrendingUp,
   MapPin, Building2, Package, Settings, CheckCircle, Star, Clock,
-  FlaskConical, Truck, Globe, Handshake, Target, Zap
+  FlaskConical, Truck, Globe, Handshake, Target, Zap, Download, Phone, MessageCircle
 } from "lucide-react";
 import barrelsRow from "@/assets/Gemini_Generated_Image_jdayycjdayycjday.png";
 import barrelsStacked from "@/assets/barrels-stacked.jpg";
@@ -58,10 +59,26 @@ const team = [
   { name: "24/7", title: "Support Team", icon: Clock },
 ];
 
+// Updated partners list - ONLY the requested clients
 const partners = [
-  "Indian Oil", "Bharat Petroleum", "Hindustan Petroleum", "Tata Motors",
-  "Mahindra & Mahindra", "Ashok Leyland", "Siemens", "ABB", "L&T", "Godrej"
+  "H.P.C.L", "B.P.C.L", "I.O.C.L", "Reliance", "Nayara Energy"
 ];
+
+// Function to handle PDF download
+const handleBrochureDownload = () => {
+  // Method 1: Place your PDF in the public folder
+  // Create folder: public/brochures/ and add your PDF file
+  const pdfUrl = "/brochures/tolani-petroleum-brochure.pdf"; // Update this path
+  const link = document.createElement("a");
+  link.href = pdfUrl;
+  link.download = "Tolani-Petroleum-Brochure.pdf";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  
+  // Method 2: If you don't have a PDF file yet, this will open a sample PDF
+  // window.open('https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf', '_blank');
+};
 
 const About = () => (
   <div className="min-h-screen pt-16 sm:pt-20 bg-background overflow-x-hidden">
@@ -384,7 +401,7 @@ const About = () => (
       </div>
     </section>
 
-    {/* Industry Partners - NEW SECTION */}
+    {/* Industry Partners - UPDATED with ONLY the requested clients */}
     <section className="py-12 sm:py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <ScrollReveal>
@@ -396,7 +413,7 @@ const About = () => (
               Our Valued Partners
             </h2>
             <p className="text-gray-600 text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-4">
-              Proud to serve India's most respected industrial organizations
+              Proud to serve India's leading petroleum and energy companies
             </p>
           </div>
         </ScrollReveal>
@@ -542,7 +559,7 @@ const About = () => (
       </div>
     </section>
 
-    {/* CTA Section */}
+    {/* CTA Section - UPDATED with redirect and download button */}
     <section className="relative overflow-hidden py-16 sm:py-20 md:py-24">
       <img 
         src={infraImg} 
@@ -553,9 +570,12 @@ const About = () => (
       
       <div className="relative max-w-4xl mx-auto text-center px-4 sm:px-6">
         <ScrollReveal>
-          <span className="text-amber text-xs sm:text-sm font-semibold tracking-[0.2em] sm:tracking-[0.3em] uppercase mb-2 sm:mb-3 md:mb-4 block">
-            Partner With Us
-          </span>
+          {/* Get in Touch - Now redirects to contact page */}
+          <Link to="/contact">
+            <span className="text-amber text-xs sm:text-sm font-semibold tracking-[0.2em] sm:tracking-[0.3em] uppercase mb-2 sm:mb-3 md:mb-4 block hover:text-amber-600 transition-colors cursor-pointer">
+              Get in Touch
+            </span>
+          </Link>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 md:mb-6 px-2">
             Ready to experience the{' '}
             <span className="text-amber whitespace-nowrap">Tolani</span> difference?
@@ -564,11 +584,17 @@ const About = () => (
             Join 500+ industrial clients who trust us for their critical lubrication needs
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
-            <button className="px-6 sm:px-8 py-3 sm:py-4 bg-amber text-gray-900 font-semibold text-sm sm:text-base rounded-full hover:bg-amber/90 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl hover:shadow-amber/30">
-              Get in Touch
-            </button>
-            <button className="px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/30 text-white font-semibold text-sm sm:text-base rounded-full hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1">
-              Download Brochure
+            <Link
+              to="/contact"
+              className="px-6 sm:px-8 py-3 sm:py-4 bg-amber text-gray-900 font-semibold text-sm sm:text-base rounded-full hover:bg-amber/90 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl hover:shadow-amber/30 inline-flex items-center gap-2"
+            >
+              <Phone className="w-4 h-4 sm:w-5 sm:h-5" /> Contact Us
+            </Link>
+            <button
+              onClick={handleBrochureDownload}
+              className="px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/30 text-white font-semibold text-sm sm:text-base rounded-full hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1 inline-flex items-center gap-2"
+            >
+              <Download className="w-4 h-4 sm:w-5 sm:h-5" /> Download Brochure
             </button>
           </div>
         </ScrollReveal>

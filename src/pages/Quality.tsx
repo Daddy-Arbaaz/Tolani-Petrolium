@@ -19,7 +19,7 @@ import {
   TrendingUp,
   FlaskConical
 } from "lucide-react";
-import qualityBarrels from "@/assets/quality-barrels.jpg";
+import qualityBarrels from "@/assets/QulaityBr.jpeg";
 import qualityLab from "@/assets/quality-lab.jpg";
 import qualityCustomer from "@/assets/quality-customer.jpg";
 import labTesting from "@/assets/lab-testing.jpg";

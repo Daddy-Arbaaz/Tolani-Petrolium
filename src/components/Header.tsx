@@ -18,6 +18,15 @@ export const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
+  // FIX: Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant" // Use "instant" instead of "smooth" for immediate scroll
+    });
+  }, [location.pathname]);
+
   // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
@@ -78,7 +87,13 @@ export const Header = () => {
               variants={logoVariants}
               className="relative group flex-shrink-0"
             >
-              <Link to="/" className="flex items-center gap-3">
+              <Link 
+                to="/" 
+                className="flex items-center gap-3"
+                onClick={() => {
+                  window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+                }}
+              >
                 <div className="relative">
                   <img 
                     src={logoImg} 
@@ -121,6 +136,9 @@ export const Header = () => {
                 >
                   <Link
                     to={link.path}
+                    onClick={() => {
+                      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+                    }}
                     className={`relative text-sm lg:text-base font-medium tracking-wide px-1 py-2 transition-all duration-300 ${
                       location.pathname === link.path
                         ? "text-[#FFB347]"
@@ -196,7 +214,10 @@ export const Header = () => {
                     >
                       <Link
                         to={link.path}
-                        onClick={() => setMobileOpen(false)}
+                        onClick={() => {
+                          setMobileOpen(false);
+                          window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+                        }}
                         className={`block text-base font-medium py-3 px-4 rounded-lg transition-all duration-200 ${
                           location.pathname === link.path
                             ? "text-[#FFB347] bg-[#FFB347]/10"
