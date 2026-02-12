@@ -133,8 +133,8 @@ export const Footer = () => (
               </div>
               <div>
                 <p className="text-xs text-gray-400 mb-0.5">Phone Numbers</p>
-                <p className="text-sm text-white font-medium">+91 22 6789 1234</p>
-                <p className="text-xs text-gray-400">+91 22 6789 1235</p>
+                <p className="text-sm text-white font-medium">+91 99204 08508</p>
+                <p className="text-xs text-gray-400">+91 99204 08508</p>
               </div>
             </div>
             
@@ -192,7 +192,7 @@ export const Footer = () => (
           </div>
 
           <a
-            href="https://wa.me/919999999999"
+            href="https://wa.me/919920408508"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-between bg-[#25D366] hover:bg-[#20ba5a] transition-colors duration-300 rounded-xl p-4 group"

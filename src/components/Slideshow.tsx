@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // Import images directly
 import slide1 from '@/assets/hero-refinery.jpg';
@@ -11,11 +12,13 @@ interface Slide {
   title: string;
   description: string;
   buttonText: string;
+  path: string; // Added path property for navigation
 }
 
 const Slideshow: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const navigate = useNavigate();
 
   const slides: Slide[] = [
     { 
@@ -23,21 +26,24 @@ const Slideshow: React.FC = () => {
       image: slide1, 
       title: 'Industrial Oils & Lubricants',
       description: 'Precision-engineered petroleum products for heavy machinery and industrial applications.',
-      buttonText: 'Explore Products'
+      buttonText: 'Explore Products',
+      path: '/products' // Redirect to Products page
     },
     { 
       id: 2, 
       image: slide2, 
       title: 'Premium Grade Specialty Oils',
       description: 'Custom-formulated solutions for transformers, compressors, and hydraulic systems.',
-      buttonText: 'Learn More'
+      buttonText: 'Learn More',
+      path: '/about' // Redirect to About page
     },
     { 
       id: 3, 
       image: slide3, 
       title: 'Sustainable Eco-Safe Solutions',
       description: 'Environmentally responsible products that deliver performance without compromise.',
-      buttonText: 'Discover More'
+      buttonText: 'Discover More',
+      path: '/green-earth' // Redirect to Green Earth page
     },
   ];
 
@@ -65,6 +71,10 @@ const Slideshow: React.FC = () => {
         }, 100);
       }, 800);
     }
+  };
+
+  const handleButtonClick = (path: string) => {
+    navigate(path);
   };
 
   return (
@@ -96,7 +106,10 @@ const Slideshow: React.FC = () => {
           <p className="description">
             {slides[currentSlide].description}
           </p>
-          <button className="button">
+          <button 
+            className="button"
+            onClick={() => handleButtonClick(slides[currentSlide].path)}
+          >
             {slides[currentSlide].buttonText}
             <span className="arrow">→</span>
           </button>
