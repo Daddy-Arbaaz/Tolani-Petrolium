@@ -40,7 +40,7 @@ const milestones = [
 
 const facilities = [
   { icon: MapPin, title: "Navi Mumbai", desc: "Corporate Headquarters" },
-  { icon: Building2, title: "50+ Acres", desc: "Manufacturing Facility" },
+  { icon: Building2, title: "5000+ Sq.ft", desc: "Manufacturing Facility" },
   { icon: Package, title: "10,000 KL", desc: "Storage Capacity" },
   { icon: Settings, title: "5 Lines", desc: "Advanced Blending Units" },
 ];
@@ -65,7 +65,7 @@ const partners = [
 ];
 
 // Function to handle PDF download
-const handleBrochureDownload = () => {
+const   handleBrochureDownload = () => {
   // Method 1: Place your PDF in the public folder
   // Create folder: public/brochures/ and add your PDF file
   const pdfUrl = "/brochures/tolani-petroleum-brochure.pdf"; // Update this path
@@ -218,7 +218,7 @@ const About = () => (
                   in the Indian petroleum industry.
                 </p>
                 <p>
-                  From our state-of-the-art manufacturing facility in Navi Mumbai, spanning over 50 acres of advanced 
+                  From our state-of-the-art manufacturing facility in Navi Mumbai, spanning over 5000+ sq.ft of advanced 
                   processing infrastructure, we serve over 500 industrial clients with more than 100 specialized product variants.
                 </p>
               </div>
@@ -229,7 +229,7 @@ const About = () => (
                     <Factory className="w-4 h-4 sm:w-5 sm:h-5 text-amber" />
                   </div>
                   <div className="min-w-0">
-                    <div className="font-bold text-gray-900 text-sm sm:text-base truncate">5+ Acres</div>
+                    <div className="font-bold text-gray-900 text-sm sm:text-base truncate">5000+ Sq.ft</div>
                     <div className="text-xs text-gray-500 truncate">Manufacturing Facility</div>
                   </div>
                 </div>
